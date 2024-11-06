@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from service import convert_file_to
 
 router = APIRouter()
 
@@ -14,6 +15,7 @@ def get_converted_data():
 @router.post('/convert')
 def convert_excel(data):
     try:
+        convert_file_to(data=data['val'])
         print(data)
     except:
         pass
