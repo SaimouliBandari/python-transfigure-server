@@ -11,11 +11,11 @@ def get_converted_data():
     except: 
         pass
 
-@router.post('/convert')
-def convert_excel(data):
+@router.post('/convert-to/{type}')
+def convert_excel(type, data = None):
     try:
-        return convert_file_to(data='', type='')
-        # print(data)
+        print(data, type)
+        return convert_file_to(data=data, type=type)
     except Exception as e:
         print('Error while :>> executing convert_file_to from convert_excel api')
         print(e)
