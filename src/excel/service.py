@@ -23,8 +23,7 @@ def to_csv(df: pd.DataFrame):
     return df.to_csv()
 
 @register
-def to_html(df: pd.DataFrame):
-    print(df.to_html())
+def to_html(df: pd.DataFrame):    
     return df.to_html()
 
 def base64_to_excel(data:str):
@@ -46,4 +45,4 @@ def convert_file_to(type:str, data:str):
         return pandas_function_mapping[type](excel_data)
     except Exception as e:
         print("Error While Converting File >>> ", str(e))
-        pass
+        return e

@@ -1,9 +1,8 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse, StreamingResponse
-
 from src.excel.service import convert_file_to
-router = APIRouter()
 
+router = APIRouter()
 
 @router.get('')
 def get_converted_data():
