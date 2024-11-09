@@ -2,7 +2,6 @@ import pandas as pd
 import base64
 import io
 import os
-import json
 
 pandas_function_mapping = {
 }
@@ -20,11 +19,12 @@ def to_json(df: pd.DataFrame):
     return df.to_dict(orient='records')
 
 @register
-def to_cvs(df: pd.DataFrame):
+def to_csv(df: pd.DataFrame):
     return df.to_csv()
 
 @register
 def to_html(df: pd.DataFrame):
+    print(df.to_html())
     return df.to_html()
 
 def base64_to_excel(data:str):
@@ -36,11 +36,14 @@ def read_excel_from_base64(base64_data):
     return base64_to_excel(data=decoded_buffer)
 
 def convert_file_to(type:str, data:str):
-    print(not data)
-    if not data:    
-        current_dir = os.path.dirname(__file__)
-        test_file_path = os.path.join(current_dir, 'text.txt')
-        file = open(test_file_path, 'r') 
-        data = file.read()  
-    excel_data = read_excel_from_base64(base64_data=data) 
-    return pandas_function_mapping[type](excel_data)
+    try:    
+        if not data:    
+            current_dir = os.path.dirname(__file__)
+            test_file_path = os.path.join(current_dir, 'text.txt')
+            file = open(test_file_path, 'r') 
+            data = file.read()  
+        excel_data = read_excel_from_base64(base64_data=data) 
+        return pandas_function_mapping[type](excel_data)
+    except Exception as e:
+        print("Error While Converting File >>> ", str(e))
+        pass
