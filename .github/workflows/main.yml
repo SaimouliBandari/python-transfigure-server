@@ -29,31 +29,31 @@ jobs:
   #         zip transfigure.me.zip src/**/**
           
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@master
-  #   - uses: jakejarvis/s3-sync-action@master
-  #     with:
-  #       args: --follow-symlinks --delete --exclude '.git*/*'
-  #     env:
-  #       SOURCE_DIR: ./transfigure.me.zip
-  #       AWS_REGION: us-east-1
-  #       AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-   deploy:
-      runs-on: ubuntu-latest 
-      steps:
-       - uses: actions/checkout@master
-       - name: Upload file to bucket
-       - uses: zdurham/s3-upload-github-action@master
-         with:
-           args: --acl public-read
-         env:
-          FILE: ./transfigure.me.zip
-          AWS_REGION: 'us-east-1'
-          S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          S3_KEY: ${{ secrets.S3_KEY }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --follow-symlinks --delete --exclude '.git*/*'
+      env:
+        SOURCE_DIR: ./transfigure.me.zip
+        AWS_REGION: us-east-1
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #  deploy:
+  #     runs-on: ubuntu-latest 
+  #     steps:
+  #      - uses: actions/checkout@master
+  #      - name: Upload file to bucket
+  #      - uses: zdurham/s3-upload-github-action@master
+  #        with:
+  #          args: --acl public-read
+  #        env:
+  #         FILE: ./transfigure.me.zip
+  #         AWS_REGION: 'us-east-1'
+  #         S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+  #         S3_KEY: ${{ secrets.S3_KEY }}
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
