@@ -31,7 +31,7 @@ jobs:
 
   deploy:
     environment:
-      name: prod
+      name: s3
     runs-on: ubuntu-latest
     steps:
     - name : print env
