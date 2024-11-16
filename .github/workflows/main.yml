@@ -36,7 +36,7 @@ jobs:
     steps:
     - name : print env
       env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_CONTEXT: ${{ toJson(secrets) }}
       run: echo "$GITHUB_CONTEXT"
     - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
