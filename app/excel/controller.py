@@ -1,6 +1,11 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse, StreamingResponse
-from src.excel.service import convert_file_to
+from app.excel.service import convert_file_to
+from pydantic import BaseModel
+
+class ConversionModal(BaseModel):
+    data: str
+    
 
 router = APIRouter()
 
@@ -12,11 +17,12 @@ def get_converted_data():
     except: 
         pass
 
+
 @router.post('/convert-to/{type}')
-def convert_excel(type, data = None):
+def convert_excel(type, data:ConversionModal):
     try:
-        print(data, type)
-        res = convert_file_to(data=data, type=type)
+        print(data.data, type)
+        res = convert_file_to(data=data.data, type=type)
         opts = {
             "media_type":'text/html',
             "headers":{"Content-Disposition": f"attachment; filename=data.html"}
